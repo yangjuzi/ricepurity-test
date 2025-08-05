@@ -2,123 +2,212 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rice Purity Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rice Purity Test - 100 Questions</title>
+  <meta name="description" content="Take the Rice Purity Test with 100 questions to find out how pure you are. Fun, anonymous, and mobile-friendly!" />
+  <meta name="keywords" content="Rice Purity Test, Purity Quiz, 100 questions, rice test, online quiz" />
+  <meta name="author" content="yangjuzi" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: #f9fafb;
+      color: #111827;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      color: #1f2937;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .question {
       margin: 10px 0;
     }
 
-    .submit-btn {
+    .question label {
       display: block;
-      margin: 30px auto;
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: #007bff;
+      margin-bottom: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #3b82f6;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
     }
 
-    .submit-btn:hover {
-      background-color: #0056b3;
+    button:hover {
+      background: #2563eb;
     }
 
-    #result {
+    .result-card {
+      max-width: 500px;
+      margin: 40px auto;
+      background: linear-gradient(135deg, #f3f4f6, #e0e7ff);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       text-align: center;
+    }
+
+    .result-card .emoji {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .result-card .score {
       font-size: 24px;
-      margin-top: 20px;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .result-card .label {
+      font-size: 20px;
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 15px;
+    }
+
+    .result-card .share-text {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .result-card .copy-btn,
+    .result-card .retake-btn {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .result-card .copy-btn:hover,
+    .result-card .retake-btn:hover {
+      background-color: #2563eb;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .result-card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Rice Purity Test</h1>
+  <h1>Rice Purity Test</h1>
+  <form id="quizForm">
+    <div id="questionsContainer"></div>
+    <button type="submit">Submit</button>
+  </form>
 
-    <form id="purityForm">
-      <div id="questionsContainer">
-        <!-- 题目将在 JavaScript 中动态生成 -->
-      </div>
-
-      <button type="submit" class="submit-btn">Submit</button>
-    </form>
-
-    <div id="result"></div>
+  <div id="resultCard" class="result-card" style="display:none;">
+    <div class="emoji" id="emoji">😌</div>
+    <div class="score" id="scoreText">Your Rice Purity Score: <strong>100 / 100</strong></div>
+    <div class="label" id="labelText">Extremely Pure</div>
+    <div class="share-text">Copy your score and share with friends!</div>
+    <button class="copy-btn" onclick="copyResult()">📋 Copy Result</button>
+    <button class="retake-btn" onclick="retakeTest()">🔁 Retake Test</button>
   </div>
 
   <script>
     const questions = [
-      "Held hands romantically?",
-      "Been on a date?",
-      "Been in a relationship?",
-      "Danced without leaving room for Jesus?",
-      "Kissed a non-family member?",
-      "Kissed a non-family member on the lips?",
-      "French kissed?",
-      "French kissed in public?",
-      "Kissed on the neck?",
-      "Kissed horizontally?",
-      // 你可以继续添加至100题...
+      "Held hands romantically","Been on a date","Kissed someone on the lips","French kissed",
+      "Kissed on the neck","Kissed horizontally","Stayed out all night","Gone to a party",
+      "Danced without leaving room for Jesus","Consumed alcohol","Used tobacco","Been in a relationship",
+      "Played a drinking game","Been intoxicated","Colored your hair","Had a piercing (non‑standard)",
+      "Got a tattoo","Dyed your hair unnaturally","Used recreational drugs","Been sent to dean’s office",
+      "Been suspended/expelled","Urinated in public","Lied to someone","Failed a class","Cheated on exam",
+      "Ran from police","Sneaked into event/property","Vandalized property","Broken into property",
+      "Driven without license or intoxicated","Been in physical fight","Gambled with money",
+      "Been arrested or handcuffed","Skipped class","Watched R‑rated movie","Inappropriate content",
+      "Created fake ID","Used profanity regularly","Been detained","Pulled all‑nighter","Had a job",
+      "Traveled abroad alone","Lived away from parents","Missed curfew","Slept with someone’s parents home",
+      "Engaged in intimate behavior","Drove 100+ mph","Been in love","Had heart broken","Orgasm due to manipulation",
+      "Sent explicit text","Sent/received nude photos","Video chat sexual act","Cheated on partner",
+      "Bought contraceptives","Given oral sex","Received oral sex","Used sex toy with partner",
+      "Spent night with partner","Walked in during sex","Kicked roommate out to have sex","Played strip game",
+      "Seen or read pornography","Masturbated","Masturbated with object","Caught masturbating","Watched porn with person",
+      "Massaged sensually","Undressed by MPS","Showered with MPS","Fondled breasts/genitals","Blue balls",
+      "Night out alcohol","Memory loss from alcohol","Used meth/crack/PCP/heroin","Skinny-dipped","Gone streaking",
+      "Seen stripper","Police called on you","Police questioned you","Snuck out of your house","Crush on teacher",
+      "Slept with teacher","Suspended school","Slept in class","Cheated on test","Copied homework",
+      "Falsified signature","Used fake ID","Lied to teacher or boss","Played spin the bottle","Played 7 minutes in heaven",
+      "Flashed someone","Mooned someone","Pranked others","Pulled false fire alarm","Eaten floor food",
+      "Peed pants laughing","Used someone else's toothbrush","Shared mouth‑to‑mouth candy","Lied about virginity",
+      "Sex in public place","Sex in car","Sex in foreign bed","Multiple partners in 24h","One‑night stand",
+      "Threesome or group sex","Sex with someone 10+ years older","Sex with stranger","Filmed sex act"
+    
     ];
 
-    const container = document.getElementById("questionsContainer");
-
-    // 渲染问题
-    questions.forEach((q, i) => {
-      const div = document.createElement("div");
-      div.classList.add("question");
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = `q${i}`;
-      checkbox.name = `q${i}`;
-
-      const label = document.createElement("label");
-      label.htmlFor = `q${i}`;
-      label.textContent = `${i + 1}. ${q}`;
-
-      div.appendChild(checkbox);
-      div.appendChild(label);
+    const container = document.getElementById('questionsContainer');
+    questions.forEach((q,i)=>{
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `<label><input type="checkbox" name="q${i}" /> ${q}</label>`;
       container.appendChild(div);
     });
 
-    // 表单提交处理
-    document.getElementById("purityForm").addEventListener("submit", function(e) {
+
+    function getEmoji(score) {
+      if (score >= 90) return '😇';
+      if (score >= 70) return '😊';
+      if (score >= 50) return '😌';
+      if (score >= 30) return '😏';
+      return '😈';
+    }
+
+    function getLabel(score) {
+      if (score >= 90) return 'Extremely Pure';
+      if (score >= 70) return 'Mildly Experienced';
+      if (score >= 50) return 'Moderately Experienced';
+      if (score >= 30) return 'Very Experienced';
+      return 'Wild Child';
+    }
+    
+
+    function copyResult() {
+      const score = parseInt(document.getElementById('scoreText').textContent.match(/\d+/)[0]);
+      const label = document.getElementById('labelText').textContent;
+      const text = `I scored ${score} on the Rice Purity Test! ${label} 😌 Try it yourself at https://yangjuzi.github.io/ricepurity-test/`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Result copied to clipboard!');
+      });
+    }
+
+    function retakeTest() {
+      location.reload();
+    }
+
+    document.getElementById('quizForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const total = questions.length;
-      let checked = 0;
-
-      for (let i = 0; i < total; i++) {
-        if (document.getElementById(`q${i}`).checked) {
-          checked++;
-        }
-      }
-
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
       const score = total - checked;
-      document.getElementById("result").textContent = `Your Rice Purity Score is: ${score}`;
+
+      document.getElementById('scoreText').innerHTML = `Your Rice Purity Score: <strong>${score} / 100</strong>`;
+      document.getElementById('emoji').textContent = getEmoji(score);
+      document.getElementById('labelText').textContent = getLabel(score);
+      document.getElementById('resultCard').style.display = 'block';
+      document.getElementById('quizForm').style.display = 'none';
     });
   </script>
 </body>
