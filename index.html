@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rice Purity Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      margin: 10px 0;
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Rice Purity Test</h1>
+
+    <form id="purityForm">
+      <div id="questionsContainer">
+        <!-- 题目将在 JavaScript 中动态生成 -->
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      "Held hands romantically?",
+      "Been on a date?",
+      "Been in a relationship?",
+      "Danced without leaving room for Jesus?",
+      "Kissed a non-family member?",
+      "Kissed a non-family member on the lips?",
+      "French kissed?",
+      "French kissed in public?",
+      "Kissed on the neck?",
+      "Kissed horizontally?",
+      // 你可以继续添加至100题...
+    ];
+
+    const container = document.getElementById("questionsContainer");
+
+    // 渲染问题
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.classList.add("question");
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = `q${i}`;
+      checkbox.name = `q${i}`;
+
+      const label = document.createElement("label");
+      label.htmlFor = `q${i}`;
+      label.textContent = `${i + 1}. ${q}`;
+
+      div.appendChild(checkbox);
+      div.appendChild(label);
+      container.appendChild(div);
+    });
+
+    // 表单提交处理
+    document.getElementById("purityForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const total = questions.length;
+      let checked = 0;
+
+      for (let i = 0; i < total; i++) {
+        if (document.getElementById(`q${i}`).checked) {
+          checked++;
+        }
+      }
+
+      const score = total - checked;
+      document.getElementById("result").textContent = `Your Rice Purity Score is: ${score}`;
+    });
+  </script>
+</body>
+</html>
