@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Am I Innocent or Dirty Quiz Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #45B7D1 0%, #4ECDC4 50%, #6BCF7F 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <a href="index.html" class="text-primary hover:text-primary-dark transition-colors font-medium">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Am I Innocent or Dirty Quiz Results</h1>
+            <p class="text-lg text-gray-600">Discover whether you're more innocent or dirty-minded!</p>
+        </div>
+
+        <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+            <!-- Result Card -->
+            <div class="flex justify-center px-4 md:px-8">
+                <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                    <!-- Background Pattern -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                        <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                        <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-bold mb-2">Innocent or Dirty Quiz</h2>
+                            <p class="opacity-90">ricepurity-test.app</p>
+                        </div>
+                        
+                        <div class="text-center mb-8">
+                            <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                <span id="score-display" class="text-4xl font-bold">60%</span>
+                            </div>
+                            <h3 id="personality-type" class="text-xl font-semibold mb-2">Balanced</h3>
+                            <p id="score-description" class="text-sm opacity-90">You have a good mix of innocence and mischief</p>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Innocence</span>
+                                <div class="flex" id="innocence-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Mischief</span>
+                                <div class="flex" id="mischief-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Curiosity</span>
+                                <div class="flex" id="curiosity-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Adventure</span>
+                                <div class="flex" id="adventure-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                <a href="innocent-dirty-quiz.html" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                    <i class="fas fa-redo mr-2"></i>Take Test Again
+                </a>
+                <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    <i class="fas fa-share mr-2"></i>Share Results
+                </button>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Dirty Mind Level</span>
+                                <span id="overall-score" class="text-primary font-bold">60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="overall-bar" class="bg-primary h-3 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Innocence Level</span>
+                                <span id="innocence-score" class="text-secondary font-bold">40%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="innocence-bar" class="bg-secondary h-3 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Mischief Factor</span>
+                                <span id="mischief-score" class="text-accent font-bold">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="mischief-bar" class="bg-accent h-3 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Curiosity Level</span>
+                                <span id="curiosity-score" class="text-purple-500 font-bold">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="curiosity-bar" class="bg-purple-500 h-3 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Adventure Spirit</span>
+                                <span id="adventure-score" class="text-indigo-500 font-bold">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="adventure-bar" class="bg-indigo-500 h-3 rounded-full" style="width: 55%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Explanation -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">What Your Results Mean</h2>
+                    <div id="score-explanation" class="text-gray-600 space-y-4">
+                        <p>Your score of <span class="font-bold text-primary">60%</span> indicates that you are <strong>Balanced</strong>!</p>
+                        <p>You have a perfect mix of innocence and mischief. You can appreciate both wholesome humor and more adult content, making you relatable to a wide range of people.</p>
+                        <p>This balance suggests you're mature enough to handle adult topics while still maintaining a sense of wonder and innocence about the world.</p>
+                    </div>
+                </div>
+
+                <!-- Recommended Tests -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                            <p class="text-sm text-gray-600">Discover your innocence score</p>
+                        </a>
+                        <a href="dirty-mind-test.html" class="block bg-gradient-to-r from-pink-100 to-pink-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Dirty Mind Test</h3>
+                            <p class="text-sm text-gray-600">How dirty is your mind?</p>
+                        </a>
+                        <a href="quiz.html" class="block bg-gradient-to-r from-purple-100 to-purple-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Personality Test</h3>
+                            <p class="text-sm text-gray-600">Find your MBTI type</p>
+                        </a>
+                        <a href="quiz.html" class="block bg-gradient-to-r from-green-100 to-green-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Mental Age Test</h3>
+                            <p class="text-sm text-gray-600">What's your psychological age?</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="innocent-dirty-result.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Am I In Love Quiz - Question</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Am I In Love Quiz</h1>
+            <p class="text-lg text-gray-600">Discover if what you're feeling is true love</p>
+        </div>
+
+        <!-- Question Card -->
+        <div class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 17</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 5.88%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes your feelings</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full bg-pink-500 text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-pink-600 transition-colors hover:scale-105 transform text-left">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction -->
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-heart text-pink-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Am I In Love Quiz</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        The "Am I In Love Quiz" is designed to help you explore and understand your romantic feelings. Love can be complex and sometimes confusing, and this quiz helps you reflect on the various signs and emotions that indicate true love.
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 17 thoughtful questions about your feelings, thoughts, and behaviors toward someone special. Each question explores different aspects of love including emotional connection, physical attraction, future planning, and personal growth.
+                    </p>
+                    <p>
+                        <strong>Scoring:</strong> Your final result will categorize your feelings as either "Deep Love," "Strong Feelings," "Growing Attraction," "Infatuation," or "Friendship" based on your responses. The quiz analyzes your answers across multiple dimensions of romantic love.
+                    </p>
+                    <div class="bg-pink-50 border border-pink-200 rounded-lg p-4 mt-6">
+                        <p class="text-pink-800">
+                            <i class="fas fa-heart mr-2"></i>
+                            <strong>Remember:</strong> Love is a deeply personal experience that manifests differently for everyone. This quiz is designed to help you reflect on your feelings, but ultimately, only you can determine what's in your heart. Trust your instincts and be honest with yourself!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="love-quiz.js"></script>
+</body>
+</html>

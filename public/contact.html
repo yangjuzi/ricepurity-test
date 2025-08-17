@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Rice Purity Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <a href="index.html" class="text-primary hover:text-primary-dark transition-colors font-medium">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Contact Us</h1>
+                <p class="text-lg text-gray-600">Have questions or feedback? We'd love to hear from you!</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-neutral mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-neutral mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-neutral mb-2">Subject</label>
+                        <select id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors">
+                            <option>General Inquiry</option>
+                            <option>Technical Issue</option>
+                            <option>Feedback</option>
+                            <option>Business Partnership</option>
+                            <option>Press Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-neutral mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message
+                    </button>
+                </form>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <i class="fas fa-envelope text-primary text-2xl mb-4"></i>
+                    <h3 class="font-semibold text-neutral mb-2">Email Us</h3>
+                    <p class="text-gray-600">hello@ricepurity-test.app</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <i class="fas fa-clock text-primary text-2xl mb-4"></i>
+                    <h3 class="font-semibold text-neutral mb-2">Response Time</h3>
+                    <p class="text-gray-600">Usually within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-white py-16 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <i class="fas fa-heart text-white text-lg"></i>
+                </div>
+                <span class="text-xl font-bold">Rice Purity Test</span>
+            </div>
+            <p class="text-gray-400">&copy; 2025 Rice Purity Test. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+            button.classList.remove('bg-primary');
+            button.classList.add('bg-green-500');
+            button.disabled = true;
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-primary');
+                button.disabled = false;
+                this.reset();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

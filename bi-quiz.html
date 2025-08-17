@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Am I Bi Quiz - Explore Your Bisexual Identity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #D946EF 0%, #EC4899 50%, #3B82F6 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Am I Bi Quiz</h1>
+            <p class="text-lg text-gray-600">Explore your bisexual identity in a safe space</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 15</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 6.67%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes your feelings</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors hover:scale-105 transform text-left" style="background: linear-gradient(135deg, #D946EF 0%, #EC4899 50%, #3B82F6 100%);">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="results-section" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Am I Bi Quiz Results</h1>
+                <p class="text-lg text-gray-600">Remember: Only you can define your identity</p>
+            </div>
+
+            <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+                <!-- Result Card -->
+                <div class="flex justify-center px-4 md:px-8">
+                    <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                            <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                            <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <h2 class="text-2xl font-bold mb-2">Am I Bi Quiz</h2>
+                                <p class="opacity-90">ricepurity-test.app</p>
+                            </div>
+                            
+                            <div class="text-center mb-8">
+                                <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <i class="fas fa-heart text-4xl"></i>
+                                </div>
+                                <h3 id="exploration-level" class="text-xl font-semibold mb-2">Exploring</h3>
+                                <p id="score-description" class="text-sm opacity-90">Your journey of self-discovery</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Self-Awareness</span>
+                                    <div class="flex" id="awareness-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Openness</span>
+                                    <div class="flex" id="openness-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Authenticity</span>
+                                    <div class="flex" id="authenticity-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Courage</span>
+                                    <div class="flex" id="courage-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                    <button id="restart-btn" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Reflect Again
+                    </button>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Support
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                    <!-- Important Message -->
+                    <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl shadow-xl p-8 border border-purple-200">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-heart text-purple-600 text-2xl mr-4"></i>
+                            <h2 class="text-2xl font-bold text-neutral">Important Message</h2>
+                        </div>
+                        <div class="text-gray-700 space-y-4">
+                            <p class="text-lg font-semibold">Your identity is valid, whatever it may be.</p>
+                            <p>This quiz is designed to support your journey of self-discovery, not to label or define you. Sexual orientation is deeply personal and exists on a spectrum. Only you can determine what feels right for you.</p>
+                            <p>Whether you identify as straight, gay, lesbian, bisexual, pansexual, asexual, or any other identity - or if you're still exploring - you are valued and deserving of love and respect.</p>
+                        </div>
+                    </div>
+
+                    <!-- Reflection Results -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Your Reflection Journey</h2>
+                        <div id="score-explanation" class="text-gray-600 space-y-4">
+                            <p>Based on your responses, you may be in a phase of <strong>exploration and self-discovery</strong>.</p>
+                            <p>This is a completely normal and healthy part of understanding yourself. Take your time, be patient with yourself, and remember that your journey is unique to you.</p>
+                            <p>Consider connecting with supportive communities, trusted friends, or counselors who can provide guidance during your exploration.</p>
+                        </div>
+                    </div>
+
+                    <!-- Support Resources -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Support Resources</h2>
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-users text-blue-600 mr-3"></i>LGBTQ+ Communities
+                                </h3>
+                                <p class="text-sm text-gray-600">Connect with local or online LGBTQ+ support groups and communities.</p>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-phone text-green-600 mr-3"></i>Crisis Support
+                                </h3>
+                                <p class="text-sm text-gray-600">The Trevor Project: 1-866-488-7386 (24/7 crisis support for LGBTQ+ youth)</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-book text-purple-600 mr-3"></i>Educational Resources
+                                </h3>
+                                <p class="text-sm text-gray-600">PFLAG, GLAAD, and Human Rights Campaign offer great educational materials.</p>
+                            </div>
+                            
+                            <div class="bg-pink-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-heart text-pink-600 mr-3"></i>Professional Support
+                                </h3>
+                                <p class="text-sm text-gray-600">Consider speaking with LGBTQ+-affirming counselors or therapists.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Tests -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Other Exploration Quizzes</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                                <p class="text-sm text-gray-600">Explore your life experiences</p>
+                            </a>
+                            <a href="sexuality-test.html" class="block bg-gradient-to-r from-rainbow-100 to-rainbow-200 p-4 rounded-xl hover:shadow-lg transition-all" style="background: linear-gradient(135deg, #FFB6C1 0%, #DDA0DD 100%);">
+                                <h3 class="font-semibold text-neutral mb-2">Sexuality Test</h3>
+                                <p class="text-sm text-gray-600">General sexuality exploration</p>
+                            </a>
+                            <a href="lesbian-quiz.html" class="block bg-gradient-to-r from-pink-100 to-red-100 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Am I Lesbian Quiz</h3>
+                                <p class="text-sm text-gray-600">Explore lesbian identity</p>
+                            </a>
+                            <a href="pansexual-quiz.html" class="block bg-gradient-to-r from-yellow-100 to-pink-100 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Am I Pansexual Quiz</h3>
+                                <p class="text-sm text-gray-600">Explore pansexual identity</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction (Shown Initially) -->
+        <div id="intro-section" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style="background: linear-gradient(135deg, #D946EF 0%, #EC4899 50%, #3B82F6 100%);">
+                    <i class="fas fa-heart text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Am I Bi Quiz</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        This quiz is designed as a safe space for self-reflection about bisexual identity and attractions. It's important to understand that <strong>sexual orientation is deeply personal and cannot be determined by any quiz</strong>.
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 15 thoughtful questions about your feelings, attractions, and experiences with people of different genders. These questions are designed to help you reflect on your own emotions in a supportive environment.
+                    </p>
+                    <p>
+                        <strong>Important to know:</strong> Bisexuality exists on a spectrum and can manifest differently for each person. Some people are equally attracted to all genders, while others may have preferences that fluctuate over time. All experiences are valid.
+                    </p>
+                    <div class="border border-purple-200 rounded-lg p-4 mt-6" style="background: linear-gradient(135deg, #FDF2F8 0%, #EFF6FF 100%);">
+                        <p class="text-purple-800">
+                            <i class="fas fa-heart mr-2"></i>
+                            <strong>Remember:</strong> Your identity is valid regardless of the results. This quiz is meant to support your journey of self-discovery, not define you. Take your time, be honest with yourself, and know that whatever you discover about yourself is perfectly okay.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                        <p class="text-blue-800">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            <strong>Support Resources:</strong> If you're questioning your sexual orientation, consider reaching out to LGBTQ+ support organizations, counselors, or trusted friends and family members who can provide support during your journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="bi-quiz.js"></script>
+</body>
+</html>

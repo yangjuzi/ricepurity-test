@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Rice Purity Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="#" class="text-primary font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Our Blog</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Insights, tips, and interesting articles about personality tests and self-discovery</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gradient-to-br from-primary to-primary-dark"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-primary font-medium mb-2">Psychology</div>
+                        <h2 class="text-xl font-bold text-neutral mb-3">Understanding Your Rice Purity Score</h2>
+                        <p class="text-gray-600 mb-4">Learn what your score really means and how to interpret the different dimensions of your results.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Jan 15, 2025</span>
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gradient-to-br from-secondary to-accent"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-secondary font-medium mb-2">Relationships</div>
+                        <h2 class="text-xl font-bold text-neutral mb-3">The Psychology Behind Purity Tests</h2>
+                        <p class="text-gray-600 mb-4">Explore the fascinating psychology behind why people take purity tests and what it reveals.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Jan 12, 2025</span>
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-purple-500 font-medium mb-2">Self-Discovery</div>
+                        <h2 class="text-xl font-bold text-neutral mb-3">5 Ways Personality Tests Help You Grow</h2>
+                        <p class="text-gray-600 mb-4">Discover how taking personality tests can lead to better self-understanding and personal growth.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Jan 10, 2025</span>
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-blue-400"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-green-500 font-medium mb-2">History</div>
+                        <h2 class="text-xl font-bold text-neutral mb-3">The Origin Story of Rice University's Famous Test</h2>
+                        <p class="text-gray-600 mb-4">Learn about the fascinating history behind the Rice Purity Test and how it became a cultural phenomenon.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Jan 8, 2025</span>
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="test.html" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-dark transition-colors">
+                <i class="fas fa-play mr-2"></i>Take the Rice Purity Test
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-white py-16 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-6 gap-6 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold">Rice Purity Test</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">The most trusted and comprehensive Rice Purity Test online. Discover your innocence score today!</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="test.html" class="text-gray-400 hover:text-primary transition-colors">Take Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Other Quizzes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact Us</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Popular Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Dirty Mind Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Innocent Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Naughty Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">How Pure Are You Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Simp Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Gay Test</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">More Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Sexuality Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Bi Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Lesbian Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Pansexual Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I Asexual Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Am I In Love Quiz</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Personality Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Mental Age Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Emotional Maturity Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">How Old Do You Act Quiz</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Depression Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Anxiety Test</a></li>
+                        <li><a href="quiz.html" class="text-gray-400 hover:text-primary transition-colors">Personality Test (MBTI)</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Rice Purity Test. All rights reserved. | Designed for entertainment purposes only.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

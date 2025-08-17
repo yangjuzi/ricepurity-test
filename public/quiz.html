@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Personality Quizzes - Rice Purity Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="#" class="text-primary font-medium">Quiz</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">All Personality Quizzes</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our complete collection of fun and insightful personality tests</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <!-- All 23 tests -->
+            <div class="bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-brain text-pink-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Dirty Mind Test</h3>
+                <p class="text-sm text-gray-600">Discover how your mind interprets everyday situations</p>
+                <a href="dirty-mind-test.html" class="inline-block mt-3 bg-pink-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-question-circle text-blue-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Innocent or Dirty Quiz</h3>
+                <p class="text-sm text-gray-600">Test your innocence level with fun scenarios</p>
+                <a href="innocent-dirty-quiz.html" class="inline-block mt-3 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-red-100 to-red-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-fire text-red-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Naughty Quiz</h3>
+                <p class="text-sm text-gray-600">Find out your mischievous side</p>
+                <a href="naughty-quiz.html" class="inline-block mt-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-xl hover-lift">
+                <i class="fas fa-dove text-green-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">How Pure Are You Quiz</h3>
+                <p class="text-sm text-gray-600">Alternative purity assessment</p>
+                <a href="pure-quiz.html" class="inline-block mt-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-crown text-purple-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Simp Test</h3>
+                <p class="text-sm text-gray-600">Are you too generous in relationships?</p>
+                <a href="simp-test.html" class="inline-block mt-3 bg-purple-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-rainbow-100 to-rainbow-200 p-6 rounded-xl hover-lift cursor-pointer" style="background: linear-gradient(135deg, #FFB6C1 0%, #DDA0DD 100%);">
+                <i class="fas fa-rainbow text-purple-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Sexual Orientation Quiz</h3>
+                <p class="text-sm text-gray-600">Explore your sexuality in a safe space</p>
+                <a href="sexual-orientation-quiz.html" class="inline-block mt-3 bg-purple-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-balance-scale text-indigo-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Sexuality Test</h3>
+                <p class="text-sm text-gray-600">Understand your sexual orientation</p>
+                <a href="sexuality-test.html" class="inline-block mt-3 bg-indigo-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-venus text-cyan-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Bi Quiz</h3>
+                <p class="text-sm text-gray-600">Explore bisexual tendencies</p>
+                <a href="bi-quiz.html" class="inline-block mt-3 bg-cyan-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-rose-100 to-rose-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-female text-rose-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Lesbian Quiz</h3>
+                <p class="text-sm text-gray-600">Understand lesbian identity</p>
+                <a href="lesbian-quiz.html" class="inline-block mt-3 bg-rose-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-violet-100 to-violet-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-infinity text-violet-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Pansexual Quiz</h3>
+                <p class="text-sm text-gray-600">Explore pansexual orientation</p>
+                <a href="pansexual-quiz.html" class="inline-block mt-3 bg-violet-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-circle text-gray-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I Asexual Quiz</h3>
+                <p class="text-sm text-gray-600">Understanding asexuality</p>
+                <span class="inline-block mt-3 bg-gray-500 text-white px-3 py-1 rounded-full text-xs">Coming Soon</span>
+            </div>
+            
+            <div class="bg-gradient-to-br from-red-100 to-pink-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-heart text-red-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Am I In Love Quiz</h3>
+                <p class="text-sm text-gray-600">Discover if you're truly in love</p>
+                <a href="love-quiz.html" class="inline-block mt-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-birthday-cake text-yellow-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Mental Age Test</h3>
+                <p class="text-sm text-gray-600">Find out your psychological age</p>
+                <a href="mental-age-test.html" class="inline-block mt-3 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-emerald-100 to-emerald-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-leaf text-emerald-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Emotional Maturity Test</h3>
+                <p class="text-sm text-gray-600">Assess your emotional intelligence</p>
+                <a href="emotional-maturity-test.html" class="inline-block mt-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-lime-100 to-lime-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-clock text-lime-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">How Old Do You Act Quiz</h3>
+                <p class="text-sm text-gray-600">Discover your behavioral age</p>
+                <a href="how-old-act-quiz.html" class="inline-block mt-3 bg-lime-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-slate-100 to-slate-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-cloud-rain text-slate-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Depression Test</h3>
+                <p class="text-sm text-gray-600">Mental health assessment</p>
+                <a href="depression-test.html" class="inline-block mt-3 bg-slate-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-orange-100 to-red-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-heartbeat text-orange-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Anxiety Test</h3>
+                <p class="text-sm text-gray-600">Understand your anxiety levels</p>
+                <a href="anxiety-test.html" class="inline-block mt-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-teal-100 to-teal-200 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-user-check text-teal-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Personality Test (MBTI)</h3>
+                <p class="text-sm text-gray-600">Discover your personality type</p>
+                <a href="personality-test.html" class="inline-block mt-3 bg-teal-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-pink-100 to-red-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-link text-pink-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Kink Test</h3>
+                <p class="text-sm text-gray-600">Explore your preferences safely</p>
+                <a href="kink-test.html" class="inline-block mt-3 bg-pink-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-indigo-100 to-purple-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-magic text-indigo-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Freaky Quiz</h3>
+                <p class="text-sm text-gray-600">How adventurous are you?</p>
+                <a href="freaky-quiz.html" class="inline-block mt-3 bg-indigo-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-emerald-100 to-blue-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-balance-scale-right text-emerald-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Are You Dominant or Submissive Quiz</h3>
+                <p class="text-sm text-gray-600">Discover your relationship dynamics</p>
+                <a href="dominant-submissive-quiz.html" class="inline-block mt-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-rose-100 to-pink-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-heart-circle text-rose-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Love Language Quiz</h3>
+                <p class="text-sm text-gray-600">Find your way of expressing love</p>
+                <a href="love-language-quiz.html" class="inline-block mt-3 bg-rose-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+            
+            <div class="bg-gradient-to-br from-amber-100 to-orange-100 p-6 rounded-xl hover-lift cursor-pointer">
+                <i class="fas fa-wink text-amber-600 text-2xl mb-3"></i>
+                <h3 class="font-semibold text-neutral mb-2">Flirt Quiz</h3>
+                <p class="text-sm text-gray-600">How good are you at flirting?</p>
+                <a href="flirt-quiz.html" class="inline-block mt-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs">Take Now</a>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="test.html" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-dark transition-colors">
+                <i class="fas fa-play mr-2"></i>Take the Rice Purity Test
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-white py-16 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-6 gap-6 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold">Rice Purity Test</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">The most trusted and comprehensive Rice Purity Test online. Discover your innocence score today!</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="test.html" class="text-gray-400 hover:text-primary transition-colors">Take Test</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Other Quizzes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact Us</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Popular Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Dirty Mind Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Innocent Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Naughty Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">How Pure Are You Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Simp Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Gay Test</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">More Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Sexuality Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Bi Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Lesbian Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Pansexual Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I Asexual Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Am I In Love Quiz</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Personality Tests</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Mental Age Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Emotional Maturity Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">How Old Do You Act Quiz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Depression Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Anxiety Test</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Personality Test (MBTI)</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Rice Purity Test. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Test - Mental Health Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Anxiety Test</h1>
+            <p class="text-lg text-gray-600">A mental health screening tool for anxiety awareness</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 16</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 6.25%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes how you've been feeling</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full bg-amber-500 text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-amber-600 transition-colors hover:scale-105 transform text-left">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="results-section" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Anxiety Test Results</h1>
+                <p class="text-lg text-gray-600">Understanding your anxiety indicators</p>
+            </div>
+
+            <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+                <!-- Result Card -->
+                <div class="flex justify-center px-4 md:px-8">
+                    <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                            <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                            <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <h2 class="text-2xl font-bold mb-2">Anxiety Test</h2>
+                                <p class="opacity-90">ricepurity-test.app</p>
+                            </div>
+                            
+                            <div class="text-center mb-8">
+                                <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <span id="score-display" class="text-4xl font-bold">Low</span>
+                                </div>
+                                <h3 id="anxiety-level" class="text-xl font-semibold mb-2">Minimal</h3>
+                                <p id="score-description" class="text-sm opacity-90">You show few signs of anxiety</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Worry Level</span>
+                                    <div class="flex" id="worry-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Physical Symptoms</span>
+                                    <div class="flex" id="physical-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Calmness</span>
+                                    <div class="flex" id="calmness-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Confidence</span>
+                                    <div class="flex" id="confidence-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                    <button id="restart-btn" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Take Test Again
+                    </button>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Support
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                    <!-- Important Message -->
+                    <div class="bg-gradient-to-r from-amber-100 to-orange-100 rounded-2xl shadow-xl p-8 border border-amber-200">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-info-circle text-amber-600 text-2xl mr-4"></i>
+                            <h2 class="text-2xl font-bold text-neutral">Important Message</h2>
+                        </div>
+                        <div class="text-gray-700 space-y-4">
+                            <p class="text-lg font-semibold">This is a screening tool, not a diagnosis.</p>
+                            <p>This test is designed for educational purposes and self-awareness only. It cannot replace professional medical advice, diagnosis, or treatment. If you're experiencing persistent anxiety, panic attacks, or thoughts of self-harm, please reach out to a mental health professional immediately.</p>
+                            <p>Your mental health matters, and seeking help is a sign of strength, not weakness.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Anxiety Indicators</span>
+                                    <span id="overall-score" class="text-primary font-bold">Low</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="overall-bar" class="bg-primary h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Worry Level</span>
+                                    <span id="worry-score" class="text-secondary font-bold">Low</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="worry-bar" class="bg-secondary h-3 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Physical Symptoms</span>
+                                    <span id="physical-score" class="text-accent font-bold">Minimal</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="physical-bar" class="bg-accent h-3 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Calmness</span>
+                                    <span id="calmness-score" class="text-purple-500 font-bold">High</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="calmness-bar" class="bg-purple-500 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Confidence</span>
+                                    <span id="confidence-score" class="text-green-500 font-bold">Good</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="confidence-bar" class="bg-green-500 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Score Explanation -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">What Your Results Mean</h2>
+                        <div id="score-explanation" class="text-gray-600 space-y-4">
+                            <p>Your results indicate <span class="font-bold text-primary">Minimal</span> signs of anxiety.</p>
+                            <p>You appear to have good mental health with manageable stress levels and effective coping mechanisms.</p>
+                            <p>Continue taking care of your mental health through self-care and healthy habits.</p>
+                        </div>
+                    </div>
+
+                    <!-- Support Resources -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Mental Health Resources</h2>
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-phone text-blue-600 mr-3"></i>Crisis Support
+                                </h3>
+                                <p class="text-sm text-gray-600">National Suicide Prevention Lifeline: 988 (24/7 free support)</p>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-comments text-green-600 mr-3"></i>Text Support
+                                </h3>
+                                <p class="text-sm text-gray-600">Crisis Text Line: Text HOME to 741741</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-user-md text-purple-600 mr-3"></i>Professional Help
+                                </h3>
+                                <p class="text-sm text-gray-600">Consider speaking with a therapist or counselor for ongoing support</p>
+                            </div>
+                            
+                            <div class="bg-pink-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-neutral mb-2 flex items-center">
+                                    <i class="fas fa-heart text-pink-600 mr-3"></i>Self-Care
+                                </h3>
+                                <p class="text-sm text-gray-600">Practice relaxation techniques, exercise, and connect with supportive people</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Tests -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="depression-test.html" class="block bg-gradient-to-r from-slate-100 to-slate-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Depression Test</h3>
+                                <p class="text-sm text-gray-600">Mental health assessment</p>
+                            </a>
+                            <a href="emotional-maturity-test.html" class="block bg-gradient-to-r from-green-100 to-green-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Emotional Maturity Test</h3>
+                                <p class="text-sm text-gray-600">Assess your emotional intelligence</p>
+                            </a>
+                            <a href="mental-age-test.html" class="block bg-gradient-to-r from-yellow-100 to-yellow-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Mental Age Test</h3>
+                                <p class="text-sm text-gray-600">What's your psychological age?</p>
+                            </a>
+                            <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                                <p class="text-sm text-gray-600">Discover your innocence score</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction (Shown Initially) -->
+        <div id="intro-section" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-heartbeat text-amber-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Anxiety Test</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        The Anxiety Test is a mental health screening tool designed to help you assess potential signs of anxiety disorders. This test is based on common symptoms and indicators used by mental health professionals for initial screening.
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 16 questions about your worry patterns, physical symptoms, and general anxiety levels over recent weeks. Each question explores different aspects of anxiety including generalized worry, social anxiety, and physical manifestations.
+                    </p>
+                    <p>
+                        <strong>Scoring:</strong> Your final result will categorize your anxiety indicators as either "Minimal," "Mild," "Moderate," "Moderately Severe," or "Severe" based on your responses. The test analyzes your answers across multiple dimensions including worry level, physical symptoms, calmness, and confidence.
+                    </p>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-6">
+                        <p class="text-red-800">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            <strong>Important:</strong> This test is for educational purposes only and cannot replace professional medical advice. If you're experiencing persistent anxiety, panic attacks, or thoughts of self-harm, please seek help from a mental health professional immediately.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                        <p class="text-blue-800">
+                            <i class="fas fa-heart mr-2"></i>
+                            <strong>Remember:</strong> Seeking help is a sign of strength. Mental health is just as important as physical health, and there are many effective treatments available for anxiety. You deserve support and care.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="anxiety-test.js"></script>
+</body>
+</html>

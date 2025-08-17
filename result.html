@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Rice Purity Test Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD93D 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+        .score-circle {
+            background: conic-gradient(#FFD93D 0deg, #FFD93D var(--progress), transparent var(--progress));
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <a href="index.html" class="text-primary hover:text-primary-dark transition-colors font-medium">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Rice Purity Test Results</h1>
+            <p class="text-lg text-gray-600">Here's your detailed analysis and purity score</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+            <!-- Result Card -->
+            <div class="flex justify-center px-4 md:px-8">
+                <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                    <!-- Background Pattern -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                        <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                        <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-bold mb-2">Rice Purity Test</h2>
+                            <p class="opacity-90">ricepurity-test.app</p>
+                        </div>
+                        
+                        <div class="text-center mb-8">
+                            <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                <span id="score-display" class="text-4xl font-bold">85</span>
+                            </div>
+                            <h3 id="purity-level" class="text-xl font-semibold mb-2">Quite Pure</h3>
+                            <p id="score-description" class="text-sm opacity-90">You're relatively innocent with room for adventure</p>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Social Life</span>
+                                <div class="flex" id="social-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Romance</span>
+                                <div class="flex" id="romance-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Adventure</span>
+                                <div class="flex" id="adventure-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <span class="text-sm">Maturity</span>
+                                <div class="flex" id="maturity-stars">
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-yellow-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Overall Purity</span>
+                                <span id="overall-score" class="text-primary font-bold">85/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="overall-bar" class="bg-primary h-3 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Social Experiences</span>
+                                <span id="social-score" class="text-secondary font-bold">72/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="social-bar" class="bg-secondary h-3 rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Romantic Life</span>
+                                <span id="romance-score" class="text-accent font-bold">90/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="romance-bar" class="bg-accent h-3 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Adventure Level</span>
+                                <span id="adventure-score" class="text-purple-500 font-bold">65/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="adventure-bar" class="bg-purple-500 h-3 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium text-neutral">Maturity Level</span>
+                                <span id="maturity-score" class="text-indigo-500 font-bold">78/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="maturity-bar" class="bg-indigo-500 h-3 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Explanation -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">What Your Score Means</h2>
+                    <div id="score-explanation" class="text-gray-600 space-y-4">
+                        <p>Your score of <span class="font-bold text-primary">85</span> indicates that you're <strong>quite pure</strong> with a relatively innocent approach to life experiences.</p>
+                        <p>This suggests you've maintained traditional values while still engaging in some social activities. You likely prioritize meaningful relationships and make thoughtful decisions about new experiences.</p>
+                        <p>Remember, there's no "right" or "wrong" score - this is simply a fun way to reflect on your life experiences!</p>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="test.html" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Take Test Again
+                    </a>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Results
+                    </button>
+                </div>
+
+                <!-- Recommended Tests -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <a href="quiz.html" class="block bg-gradient-to-r from-pink-100 to-pink-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Dirty Mind Test</h3>
+                            <p class="text-sm text-gray-600">See how your mind interprets situations</p>
+                        </a>
+                        <a href="quiz.html" class="block bg-gradient-to-r from-blue-100 to-blue-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Love Language Quiz</h3>
+                            <p class="text-sm text-gray-600">Discover how you express love</p>
+                        </a>
+                        <a href="quiz.html" class="block bg-gradient-to-r from-purple-100 to-purple-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Personality Test</h3>
+                            <p class="text-sm text-gray-600">Find your MBTI type</p>
+                        </a>
+                        <a href="quiz.html" class="block bg-gradient-to-r from-green-100 to-green-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                            <h3 class="font-semibold text-neutral mb-2">Mental Age Test</h3>
+                            <p class="text-sm text-gray-600">What's your psychological age?</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="result.js"></script>
+</body>
+</html>

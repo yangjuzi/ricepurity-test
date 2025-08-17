@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Age Test - Discover Your Psychological Age</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF6B35 50%, #E55A2B 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Mental Age Test</h1>
+            <p class="text-lg text-gray-600">Discover your psychological age and maturity level</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 15</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 6.67%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes you</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full bg-yellow-500 text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-600 transition-colors hover:scale-105 transform text-left">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="results-section" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Mental Age Test Results</h1>
+                <p class="text-lg text-gray-600">Discover your psychological age!</p>
+            </div>
+
+            <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+                <!-- Result Card -->
+                <div class="flex justify-center px-4 md:px-8">
+                    <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                            <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                            <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <h2 class="text-2xl font-bold mb-2">Mental Age Test</h2>
+                                <p class="opacity-90">ricepurity-test.app</p>
+                            </div>
+                            
+                            <div class="text-center mb-8">
+                                <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <span id="score-display" class="text-4xl font-bold">25</span>
+                                </div>
+                                <h3 id="age-category" class="text-xl font-semibold mb-2">Young Adult</h3>
+                                <p id="score-description" class="text-sm opacity-90">You think like someone in their mid-twenties</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Maturity</span>
+                                    <div class="flex" id="maturity-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Wisdom</span>
+                                    <div class="flex" id="wisdom-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Playfulness</span>
+                                    <div class="flex" id="playfulness-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Responsibility</span>
+                                    <div class="flex" id="responsibility-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                    <button id="restart-btn" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Take Test Again
+                    </button>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Results
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Mental Age</span>
+                                    <span id="overall-score" class="text-primary font-bold">25 years</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="overall-bar" class="bg-primary h-3 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Maturity Level</span>
+                                    <span id="maturity-score" class="text-secondary font-bold">60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="maturity-bar" class="bg-secondary h-3 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Wisdom</span>
+                                    <span id="wisdom-score" class="text-accent font-bold">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="wisdom-bar" class="bg-accent h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Playfulness</span>
+                                    <span id="playfulness-score" class="text-purple-500 font-bold">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="playfulness-bar" class="bg-purple-500 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Responsibility</span>
+                                    <span id="responsibility-score" class="text-green-500 font-bold">65%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="responsibility-bar" class="bg-green-500 h-3 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Score Explanation -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">What Your Results Mean</h2>
+                        <div id="score-explanation" class="text-gray-600 space-y-4">
+                            <p>Your mental age of <span class="font-bold text-primary">25 years</span> indicates that you think like a <strong>Young Adult</strong>!</p>
+                            <p>You have a good balance of maturity and playfulness, showing wisdom beyond your years while maintaining a youthful spirit.</p>
+                            <p>This suggests you approach life with both responsibility and enthusiasm.</p>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Tests -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                                <p class="text-sm text-gray-600">Discover your innocence score</p>
+                            </a>
+                            <a href="dirty-mind-test.html" class="block bg-gradient-to-r from-pink-100 to-pink-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Dirty Mind Test</h3>
+                                <p class="text-sm text-gray-600">How dirty is your mind?</p>
+                            </a>
+                            <a href="quiz.html" class="block bg-gradient-to-r from-purple-100 to-purple-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Personality Test</h3>
+                                <p class="text-sm text-gray-600">Find your MBTI type</p>
+                            </a>
+                            <a href="quiz.html" class="block bg-gradient-to-r from-green-100 to-green-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Emotional Maturity Test</h3>
+                                <p class="text-sm text-gray-600">Assess your emotional intelligence</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction (Shown Initially) -->
+        <div id="intro-section" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-birthday-cake text-yellow-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Mental Age Test</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        The Mental Age Test is a fun psychological assessment that determines your psychological age based on your preferences, behaviors, and thought patterns. Your mental age might be different from your chronological age!
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 15 questions about your lifestyle, preferences, and reactions to different situations. Each question is designed to reveal aspects of your psychological maturity and mindset.
+                    </p>
+                    <p>
+                        <strong>Scoring:</strong> Your final result will show your mental age and categorize you into age groups like "Teenager," "Young Adult," "Middle-aged," or "Wise Elder." The test analyzes your answers across multiple dimensions including maturity, wisdom, playfulness, and responsibility.
+                    </p>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+                        <p class="text-yellow-800">
+                            <i class="fas fa-birthday-cake mr-2"></i>
+                            <strong>Remember:</strong> Mental age is just one way to look at psychological development. There's no "right" or "wrong" mental age - each stage of life has its own unique advantages and perspectives!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="mental-age-test.js"></script>
+</body>
+</html>

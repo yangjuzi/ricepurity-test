@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Dominant or Submissive Quiz - Discover Your Relationship Dynamics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #1F2937 0%, #374151 50%, #4B5563 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Are You Dominant or Submissive Quiz</h1>
+            <p class="text-lg text-gray-600">Discover your relationship dynamics and communication style</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 16</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 6.25%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes you</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full bg-gray-600 text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-gray-700 transition-colors hover:scale-105 transform text-left">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="results-section" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Dominant or Submissive Quiz Results</h1>
+                <p class="text-lg text-gray-600">Discover your relationship dynamics!</p>
+            </div>
+
+            <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+                <!-- Result Card -->
+                <div class="flex justify-center px-4 md:px-8">
+                    <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                            <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                            <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <h2 class="text-2xl font-bold mb-2">Dominant or Submissive Quiz</h2>
+                                <p class="opacity-90">ricepurity-test.app</p>
+                            </div>
+                            
+                            <div class="text-center mb-8">
+                                <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <span id="score-display" class="text-4xl font-bold">Switch</span>
+                                </div>
+                                <h3 id="dynamic-type" class="text-xl font-semibold mb-2">Balanced Switch</h3>
+                                <p id="score-description" class="text-sm opacity-90">You adapt your style based on the situation</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Leadership</span>
+                                    <div class="flex" id="leadership-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Adaptability</span>
+                                    <div class="flex" id="adaptability-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Communication</span>
+                                    <div class="flex" id="communication-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Confidence</span>
+                                    <div class="flex" id="confidence-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                    <button id="restart-btn" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Take Test Again
+                    </button>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Results
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Dominant Traits</span>
+                                    <span id="dominant-score" class="text-primary font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="dominant-bar" class="bg-primary h-3 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Leadership</span>
+                                    <span id="leadership-score" class="text-secondary font-bold">60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="leadership-bar" class="bg-secondary h-3 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Adaptability</span>
+                                    <span id="adaptability-score" class="text-accent font-bold">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="adaptability-bar" class="bg-accent h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Communication</span>
+                                    <span id="communication-score" class="text-purple-500 font-bold">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="communication-bar" class="bg-purple-500 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Confidence</span>
+                                    <span id="confidence-score" class="text-green-500 font-bold">70%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="confidence-bar" class="bg-green-500 h-3 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Score Explanation -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">What Your Results Mean</h2>
+                        <div id="score-explanation" class="text-gray-600 space-y-4">
+                            <p>Your results indicate that you are a <strong>Balanced Switch</strong>!</p>
+                            <p>You adapt your communication and relationship style based on the situation and your partner's needs.</p>
+                            <p>This suggests you have excellent emotional intelligence and flexibility in relationships.</p>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Tests -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                                <p class="text-sm text-gray-600">Discover your innocence score</p>
+                            </a>
+                            <a href="love-language-quiz.html" class="block bg-gradient-to-r from-pink-100 to-red-100 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Love Language Quiz</h3>
+                                <p class="text-sm text-gray-600">How do you express love?</p>
+                            </a>
+                            <a href="kink-test.html" class="block bg-gradient-to-r from-red-100 to-red-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Kink Test</h3>
+                                <p class="text-sm text-gray-600">Explore your preferences safely</p>
+                            </a>
+                            <a href="personality-test.html" class="block bg-gradient-to-r from-purple-100 to-purple-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Personality Test</h3>
+                                <p class="text-sm text-gray-600">Find your MBTI type</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction (Shown Initially) -->
+        <div id="intro-section" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-balance-scale-right text-gray-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Dominant or Submissive Quiz</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        The Dominant or Submissive Quiz is a relationship dynamics assessment that explores your natural communication style and preferences in relationships. This test examines how you interact with others and approach decision-making in various contexts.
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 16 questions about your behavior in relationships, leadership situations, and communication preferences. Each question explores different aspects of how you naturally interact with others and handle various social dynamics.
+                    </p>
+                    <p>
+                        <strong>Scoring:</strong> Your final result will categorize you as either "Dominant," "Mostly Dominant," "Balanced Switch," "Mostly Submissive," or "Submissive" based on your responses. The test analyzes your answers across multiple dimensions including leadership, adaptability, communication, and confidence.
+                    </p>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
+                        <p class="text-gray-800">
+                            <i class="fas fa-balance-scale-right mr-2"></i>
+                            <strong>Remember:</strong> These results reflect communication and relationship styles, not personality worth. All dynamics are healthy when based on mutual respect, consent, and communication. This test is about understanding your natural preferences in relationships!
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                        <p class="text-blue-800">
+                            <i class="fas fa-heart mr-2"></i>
+                            <strong>Note:</strong> Healthy relationships involve both partners taking turns in different roles. The best relationships have good communication regardless of natural tendencies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="dominant-submissive-quiz.js"></script>
+</body>
+</html>

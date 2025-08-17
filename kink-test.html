@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kink Test - Explore Your Preferences Safely</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6B35',
+                        'primary-dark': '#E55A2B',
+                        'secondary': '#4ECDC4',
+                        'accent': '#45B7D1',
+                        'neutral': '#2C3E50',
+                        'light': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            width: 280px;
+            height: 480px;
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 50%, #991B1B 100%);
+        }
+        @media (max-width: 640px) {
+            .result-card {
+                width: 260px;
+                height: 460px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-neutral">Rice Purity Test</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-neutral">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-neutral hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="blog.html" class="text-neutral hover:text-primary transition-colors font-medium">Blog</a>
+                    <a href="quiz.html" class="text-neutral hover:text-primary transition-colors font-medium">Quiz</a>
+                    <a href="test.html" class="text-neutral hover:text-primary transition-colors font-medium">Rice Purity Test</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Test Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Kink Test</h1>
+            <p class="text-lg text-gray-600">Explore your preferences in a safe and educational environment</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="max-w-2xl mx-auto mb-12">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-neutral">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-neutral">1 / 20</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="bg-primary h-3 rounded-full progress-bar" style="width: 5%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover-lift">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-neutral mb-4" id="question-text">
+                        Loading question...
+                    </h2>
+                    <p class="text-gray-600">Choose the option that best describes your preferences</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="option-a" class="w-full bg-primary text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors hover:scale-105 transform text-left">
+                        Option A
+                    </button>
+                    <button id="option-b" class="w-full bg-red-500 text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-red-600 transition-colors hover:scale-105 transform text-left">
+                        Option B
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section (Hidden Initially) -->
+        <div id="results-section" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral mb-4">Your Kink Test Results</h1>
+                <p class="text-lg text-gray-600">Discover your preference profile!</p>
+            </div>
+
+            <div class="flex flex-col gap-12 max-w-6xl mx-auto">
+                <!-- Result Card -->
+                <div class="flex justify-center px-4 md:px-8">
+                    <div id="result-card" class="result-card rounded-3xl shadow-2xl text-white p-8 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                            <div class="absolute bottom-10 right-10 w-16 h-16 border-2 border-white rounded-full"></div>
+                            <div class="absolute top-1/2 right-5 w-12 h-12 border-2 border-white rounded-full"></div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <h2 class="text-2xl font-bold mb-2">Kink Test</h2>
+                                <p class="opacity-90">ricepurity-test.app</p>
+                            </div>
+                            
+                            <div class="text-center mb-8">
+                                <div class="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <span id="score-display" class="text-4xl font-bold">45%</span>
+                                </div>
+                                <h3 id="kink-level" class="text-xl font-semibold mb-2">Moderately Adventurous</h3>
+                                <p id="score-description" class="text-sm opacity-90">You're open to some exploration</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Openness</span>
+                                    <div class="flex" id="openness-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Adventure</span>
+                                    <div class="flex" id="adventure-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Communication</span>
+                                    <div class="flex" id="communication-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                    <span class="text-sm">Boundaries</span>
+                                    <div class="flex" id="boundaries-stars">
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                        <i class="fas fa-star text-yellow-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4 md:px-8">
+                    <button id="restart-btn" class="bg-primary text-white px-8 py-4 rounded-full font-semibold text-center hover:bg-primary-dark transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Take Test Again
+                    </button>
+                    <button id="share-btn" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                        <i class="fas fa-share mr-2"></i>Share Results
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="w-full max-w-4xl mx-auto space-y-8 px-4 md:px-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Score Breakdown</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Kink Level</span>
+                                    <span id="overall-score" class="text-primary font-bold">45%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="overall-bar" class="bg-primary h-3 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Openness</span>
+                                    <span id="openness-score" class="text-secondary font-bold">60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="openness-bar" class="bg-secondary h-3 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Adventure Level</span>
+                                    <span id="adventure-score" class="text-accent font-bold">50%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="adventure-bar" class="bg-accent h-3 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Communication</span>
+                                    <span id="communication-score" class="text-purple-500 font-bold">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="communication-bar" class="bg-purple-500 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-neutral">Boundaries</span>
+                                    <span id="boundaries-score" class="text-green-500 font-bold">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="boundaries-bar" class="bg-green-500 h-3 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Score Explanation -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">What Your Results Mean</h2>
+                        <div id="score-explanation" class="text-gray-600 space-y-4">
+                            <p>Your score of <span class="font-bold text-primary">45%</span> indicates that you are <strong>Moderately Adventurous</strong>!</p>
+                            <p>You're open to some exploration and new experiences while maintaining clear boundaries and communication.</p>
+                            <p>This suggests you have a healthy balance between curiosity and caution.</p>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Tests -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold text-neutral mb-6">Recommended Tests</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="test.html" class="block bg-gradient-to-r from-orange-100 to-orange-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Rice Purity Test</h3>
+                                <p class="text-sm text-gray-600">Discover your innocence score</p>
+                            </a>
+                            <a href="freaky-quiz.html" class="block bg-gradient-to-r from-indigo-100 to-purple-100 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Freaky Quiz</h3>
+                                <p class="text-sm text-gray-600">How adventurous are you?</p>
+                            </a>
+                            <a href="dirty-mind-test.html" class="block bg-gradient-to-r from-pink-100 to-pink-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Dirty Mind Test</h3>
+                                <p class="text-sm text-gray-600">How dirty is your mind?</p>
+                            </a>
+                            <a href="personality-test.html" class="block bg-gradient-to-r from-purple-100 to-purple-200 p-4 rounded-xl hover:shadow-lg transition-all">
+                                <h3 class="font-semibold text-neutral mb-2">Personality Test</h3>
+                                <p class="text-sm text-gray-600">Find your MBTI type</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Introduction (Shown Initially) -->
+        <div id="intro-section" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 text-center hover-lift">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-link text-red-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral mb-4">About the Kink Test</h2>
+                <div class="text-gray-600 space-y-4 max-w-3xl mx-auto">
+                    <p>
+                        The Kink Test is an educational assessment designed to help you explore and understand your preferences in intimate relationships. This test approaches the topic with maturity, respect, and emphasis on consent and communication.
+                    </p>
+                    <p>
+                        <strong>How it works:</strong> You'll answer 20 questions about your preferences, comfort levels, and attitudes toward various aspects of intimate relationships. Each question is designed to help you reflect on your own preferences in a safe, non-judgmental environment.
+                    </p>
+                    <p>
+                        <strong>Scoring:</strong> Your final result will categorize you as either "Traditional," "Slightly Adventurous," "Moderately Adventurous," "Very Adventurous," or "Extremely Kinky" based on your responses. The test analyzes your answers across multiple dimensions including openness, adventure level, communication, and boundaries.
+                    </p>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-6">
+                        <p class="text-red-800">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            <strong>Important:</strong> This test is for adults (18+) only and is designed for educational purposes. All intimate activities should involve enthusiastic consent from all parties. This test does not provide medical or relationship advice.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                        <p class="text-blue-800">
+                            <i class="fas fa-heart mr-2"></i>
+                            <strong>Remember:</strong> All preferences are valid as long as they involve consenting adults. Communication, respect, and safety should always be the foundation of any intimate relationship.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="kink-test.js"></script>
+</body>
+</html>
